@@ -9,7 +9,7 @@ export const site = {
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL || "#book",
   acceptanceUrl:
     process.env.NEXT_PUBLIC_ACCEPTANCE_URL ||
-    "https://whop.com/owner-built-software/ownerbuiltsoftware-2900-deposit/",
+    "https://whop.com/checkout/plan_Sz7TIXY8KaN4U",
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || "",
   vslEmbedUrl: process.env.NEXT_PUBLIC_VSL_EMBED_URL || "",
   obsUrl: "https://ownerbuiltsoftware.com",
