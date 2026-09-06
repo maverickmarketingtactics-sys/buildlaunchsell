@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Working version proposal — Example Field Services — BuildLaunchSell</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b1220;
+        --paper: #f7f4ef;
+        --paper-deep: #efe8dc;
+        --signal: #4f46e5;
+        --signal-hover: #4338ca;
+        --highlight: #22d3ee;
+        --steel: #312e81;
+        --line: #d9d2c5;
+        --muted: #5c6570;
+        --white: #ffffff;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Geist, ui-sans-serif, system-ui, sans-serif;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+      }
+      a { color: inherit; }
+      .wrap { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+      @media (min-width: 720px) { .wrap { padding: 3rem 1.5rem 5rem; } }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        text-decoration: none;
+      }
+      .mark { width: 28px; height: 28px; flex: none; }
+      .brand-name {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-weight: 600;
+        font-size: 1.05rem;
+        letter-spacing: -0.02em;
+      }
+      .chip {
+        font-family: "Geist Mono", ui-monospace, Menlo, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.01em;
+      }
+      .sample {
+        border: 1px solid var(--line);
+        background: var(--white);
+        color: var(--steel);
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .kicker {
+        margin: 2rem 0 0;
+        color: var(--steel);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+      }
+      h1 {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-weight: 600;
+        font-size: clamp(1.85rem, 4vw, 2.55rem);
+        line-height: 1.12;
+        letter-spacing: -0.03em;
+        margin: 0.55rem 0 0;
+      }
+      .lede { color: var(--muted); margin: 1rem 0 0; max-width: 38rem; }
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        gap: 0.75rem;
+        margin: 1.75rem 0 0;
+      }
+      .meta article {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 0.85rem;
+        padding: 0.9rem 1rem;
+      }
+      .meta dt { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+      .meta dd { margin: 0.25rem 0 0; font-weight: 500; }
+      h2 {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: 2.25rem 0 0.75rem;
+      }
+      .scope {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        overflow: hidden;
+        background: var(--white);
+      }
+      .scope li {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.95rem 1.1rem;
+        border-top: 1px solid var(--line);
+      }
+      .scope li:first-child { border-top: 0; }
+      .scope p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.92rem; }
+      .price {
+        flex: none;
+        align-self: center;
+        background: var(--paper-deep);
+        border-radius: 0.4rem;
+        padding: 0.28rem 0.5rem;
+        color: var(--ink);
+      }
+      .offer {
+        margin-top: 1.5rem;
+        padding: 1.35rem 1.25rem;
+        border-radius: 1.1rem;
+        background:
+          radial-gradient(80% 90% at 100% 0%, color-mix(in srgb, var(--highlight) 22%, transparent), transparent 55%),
+          linear-gradient(160deg, #1e1b4b 0%, var(--steel) 55%, #1e1b4b 100%);
+        color: var(--white);
+      }
+      .offer h2 { margin-top: 0; color: var(--white); }
+      .offer p { margin: 0.5rem 0 0; color: rgba(255,255,255,0.82); }
+      .offer .amount {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-size: 2.1rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin: 0.85rem 0 0;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 1.15rem;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.85rem 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.15s ease, border-color 0.15s ease;
+      }
+      .btn-primary { background: var(--signal); color: var(--white); }
+      .btn-primary:hover { background: var(--signal-hover); }
+      .btn-secondary {
+        background: color-mix(in srgb, var(--highlight) 16%, transparent);
+        color: var(--white);
+        border: 1px solid color-mix(in srgb, var(--highlight) 55%, transparent);
+      }
+      .btn-secondary:hover { background: color-mix(in srgb, var(--highlight) 26%, transparent); }
+      .terms { color: var(--muted); font-size: 0.92rem; }
+      footer {
+        margin-top: 2.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      footer strong { color: var(--ink); }
+      .accent { height: 4px; width: 4.5rem; margin: 1.25rem 0 0; border-radius: 999px; background: linear-gradient(90deg, var(--signal), var(--highlight)); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="https://buildlaunchsell.com">
+          <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="6" y="26.16" width="8" height="15.84" rx="4" fill="#4F46E5"/>
+            <rect x="18" y="16.8" width="8" height="25.2" rx="4" fill="#4F46E5"/>
+            <rect x="30" y="6" width="8" height="36" rx="4" fill="#22D3EE"/>
+          </svg>
+          <span class="brand-name">BuildLaunchSell</span>
+        </a>
+        <span class="chip sample">Sample · dry run</span>
+      </header>
+
+      <p class="kicker chip">Itemized working-version proposal</p>
+      <h1>Example Field Services</h1>
+      <p class="lede">
+        A working version you can log into in 48 hours: dispatch board, tech
+        job status, and a customer update link. Sample data for the BLS theme
+        dry run — not a live client engagement.
+      </p>
+      <div class="accent" aria-hidden="true"></div>
+
+      <dl class="meta">
+        <article>
+          <dt class="chip">Prepared for</dt>
+          <dd>Example Field Services</dd>
+        </article>
+        <article>
+          <dt class="chip">Prepared by</dt>
+          <dd>BuildLaunchSell</dd>
+        </article>
+        <article>
+          <dt class="chip">Working version</dt>
+          <dd>48 hours</dd>
+        </article>
+        <article>
+          <dt class="chip">Deposit</dt>
+          <dd>$2,900 refundable</dd>
+        </article>
+      </dl>
+
+      <h2>What you can log into</h2>
+      <ul class="scope">
+        <li>
+          <div>
+            <strong>Dispatch board</strong>
+            <p>Today’s jobs, assigned techs, and status from scheduled to complete.</p>
+          </div>
+          <span class="chip price">In scope</span>
+        </li>
+        <li>
+          <div>
+            <strong>Tech job card</strong>
+            <p>Open a job, mark on-site / done, and leave a short note.</p>
+          </div>
+          <span class="chip price">In scope</span>
+        </li>
+        <li>
+          <div>
+            <strong>Customer update link</strong>
+            <p>Shareable page: “we’re on the way” and “job complete.”</p>
+          </div>
+          <span class="chip price">In scope</span>
+        </li>
+        <li>
+          <div>
+            <strong>Seeded sample jobs</strong>
+            <p>Eight Example Field Services jobs so the loop is visible on day one.</p>
+          </div>
+          <span class="chip price">Included</span>
+        </li>
+        <li>
+          <div>
+            <strong>Accounting sync / payroll</strong>
+            <p>Out of this working version. Priced on the full build if you continue.</p>
+          </div>
+          <span class="chip price">Later</span>
+        </li>
+      </ul>
+
+      <div class="offer">
+        <p class="chip">Accept to start the 48-hour clock</p>
+        <p class="amount">$2,900 refundable deposit</p>
+        <p>
+          Pay the deposit, get a working version you can log into within 48 hours.
+          Any-reason refund within 7 days of delivery. Deposit credits to the
+          full build if you go forward. Checkout is the interim BLS plan.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://whop.com/checkout/plan_Sz7TIXY8KaN4U">
+            Accept $2,900 refundable deposit
+          </a>
+          <a class="btn btn-secondary" href="https://whop.com/checkout/plan_Sz7TIXY8KaN4U">
+            Pay $2,900 refundable deposit
+          </a>
+        </div>
+      </div>
+
+      <h2>Terms in plain language</h2>
+      <p class="terms">
+        This page is a durable sample at
+        <code class="chip">/proposals/bls-theme-dry-run</code>.
+        Example Field Services is sample data. BuildLaunchSell ships a working
+        version — not an MVP slide deck. The marketing price stays $2,900;
+        the linked checkout is the current interim plan.
+      </p>
+
+      <footer>
+        <p><strong>BuildLaunchSell</strong> · buildlaunchsell.com</p>
+        <p>Real price on call one. Working product in 48 hours.</p>
+      </footer>
+    </div>
+  </body>
+</html>
