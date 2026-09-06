@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { site } from "@/lib/site";
 
 export function Footer() {
@@ -6,9 +7,9 @@ export function Footer() {
     <footer className="border-t border-line bg-paper-deep">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         <div>
-          <p className="font-display text-2xl font-semibold text-ink">
-            BuildLaunchSell
-          </p>
+          <Link href="/" className="inline-flex items-center">
+            <Logo className="h-8" />
+          </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
             Software and app ideas, priced on call one, shipped as a refundable
             working version in 48 hours, then taken to market.

@@ -3,10 +3,11 @@
 @theme inline {
   --color-ink: #0b1220;
   --color-paper: #f7f4ef;
-  --color-signal: #e85d04;
-  --color-signal-hover: #c44d03;
-  --color-steel: #1b4332;
-  --color-steel-soft: #2d6a4f;
+  --color-signal: #4f46e5;
+  --color-signal-hover: #4338ca;
+  --color-highlight: #22d3ee;
+  --color-steel: #312e81;
+  --color-steel-soft: #3730a3;
   --color-line: #d9d2c5;
   --color-muted: #5c6570;
   --color-paper-deep: #efe8dc;

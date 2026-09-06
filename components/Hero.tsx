@@ -15,7 +15,7 @@ export function Hero() {
     <section className="relative overflow-hidden border-b border-line">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_100%_0%,color-mix(in_srgb,var(--color-signal)_14%,transparent),transparent_55%),radial-gradient(50%_40%_at_0%_100%,color-mix(in_srgb,var(--color-steel)_10%,transparent),transparent_50%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_100%_0%,color-mix(in_srgb,var(--color-signal)_16%,transparent),transparent_55%),radial-gradient(42%_36%_at_88%_8%,color-mix(in_srgb,var(--color-highlight)_18%,transparent),transparent_52%),radial-gradient(50%_40%_at_0%_100%,color-mix(in_srgb,var(--color-steel)_12%,transparent),transparent_50%)]"
       />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] md:items-center md:px-8 md:py-24">
         <div>

@@ -47,6 +47,13 @@ export const metadata: Metadata = {
     description: site.description,
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: "/brand/bls-mark.svg", type: "image/svg+xml" },
+      { url: "/brand/bls-mark.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/brand/bls-mark.png", sizes: "512x512" }],
+  },
 };
 
 export default function RootLayout({
