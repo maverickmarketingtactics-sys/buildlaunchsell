@@ -35,8 +35,28 @@ npm run lint
 | `NEXT_PUBLIC_META_PIXEL_ID` | _(empty)_ | Meta Pixel. Inactive until set. Snippet lives in `components/MetaPixel.tsx`. |
 | `NEXT_PUBLIC_VSL_EMBED_URL` | _(empty)_ | Loom / Wistia / YouTube embed `src` for the VSL slot. |
 | `NEXT_PUBLIC_SITE_URL` | `https://buildlaunchsell.com` | Canonical URL for metadata and sitemap. |
+| `PROPOSAL_ADMIN_SECRET` | _(empty)_ | Bearer token for instant proposal publish. Required for `PUT /api/proposals/:slug`. |
 
 See `.env.example`. Do not commit `.env.local`.
+
+## Proposals
+
+Publish scripts target `https://buildlaunchsell.com/proposals/<slug>`. Two paths, same URL:
+
+**Instant (API)** — brand-aware scripts `PUT` HTML + proposal JSON:
+
+```bash
+curl -X PUT "$ORIGIN/api/proposals/acme-core" \
+  -H "Authorization: Bearer $PROPOSAL_ADMIN_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"html":"<!doctype html><title>Acme</title><p>Working version scope</p>","proposal":{"client":"Acme"}}'
+```
+
+On a writable host this lands in `data/proposals/<slug>.json` (gitignored) and `/tmp/bls-proposals`. On Vercel the filesystem is ephemeral, so treat API publish as the instant preview path and commit the git fallback for durability.
+
+**Git fallback** — write `public/proposals/<slug>.html` and deploy. `GET /proposals/<slug>` serves that file if no API record exists.
+
+Stub index: `/proposals` (no public directory of clients).
 
 ## Deploy on Vercel
 
@@ -76,3 +96,5 @@ Display: Fraunces. UI: Geist. Price chips: Geist Mono.
 - `/` — conversion landing page
 - `/apply` — dedicated booking page (use when `NEXT_PUBLIC_BOOKING_URL=/apply`)
 - `/privacy` — privacy stub
+- `/proposals` — stub index for published proposals
+- `/proposals/<slug>` — live proposal HTML (API or `public/proposals/<slug>.html`)
