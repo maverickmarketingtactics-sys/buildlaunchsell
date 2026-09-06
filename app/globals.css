@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #0b1220;
+  --color-paper: #f7f4ef;
+  --color-signal: #e85d04;
+  --color-signal-hover: #c44d03;
+  --color-steel: #1b4332;
+  --color-steel-soft: #2d6a4f;
+  --color-line: #d9d2c5;
+  --color-muted: #5c6570;
+  --color-paper-deep: #efe8dc;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-signal) 28%, transparent);
+  color: var(--color-ink);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+details.faq > summary {
+  list-style: none;
+}
+
+details.faq > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq[open] .faq-plus {
+  transform: rotate(45deg);
+}
