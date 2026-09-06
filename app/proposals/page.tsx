@@ -29,9 +29,9 @@ export default function ProposalsIndexPage() {
             <code className="chip">{`{ html, proposal }`}</code>.
           </li>
           <li>
-            Git fallback: drop static HTML at{" "}
-            <code className="chip">public/proposals/&lt;slug&gt;.html</code>. The same
-            URL still serves it.
+            Git fallback: commit{" "}
+            <code className="chip">public/proposals/&lt;slug&gt;.html</code> (OBS-style
+            layout). The same URL still serves it.
           </li>
         </ul>
         <p className="mt-10">

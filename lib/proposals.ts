@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -19,36 +20,26 @@ export function isValidSlug(slug: string) {
   return SLUG_PATTERN.test(slug);
 }
 
+/** Instant + git share this layout: public/proposals/{slug}.html (+ optional .json). */
+function publicDir() {
+  return path.join(process.cwd(), "public", "proposals");
+}
+
 function tmpDir() {
   return path.join("/tmp", "bls-proposals");
 }
 
-function dataDir() {
-  return path.join(process.cwd(), "data", "proposals");
+function htmlPath(dir: string, slug: string) {
+  return path.join(dir, `${slug}.html`);
 }
 
-function publicFile(slug: string) {
-  return path.join(process.cwd(), "public", "proposals", `${slug}.html`);
-}
-
-function recordFile(dir: string, slug: string) {
+function jsonPath(dir: string, slug: string) {
   return path.join(dir, `${slug}.json`);
 }
 
-async function readRecord(file: string): Promise<ProposalRecord | null> {
+async function readText(file: string) {
   try {
-    const raw = await readFile(file, "utf8");
-    const parsed = JSON.parse(raw) as ProposalRecord;
-    if (!parsed?.html || typeof parsed.html !== "string") return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-async function readPublicHtml(slug: string): Promise<string | null> {
-  try {
-    return await readFile(publicFile(slug), "utf8");
+    return await readFile(file, "utf8");
   } catch {
     return null;
   }
@@ -57,21 +48,31 @@ async function readPublicHtml(slug: string): Promise<string | null> {
 export async function loadProposal(
   slug: string,
 ): Promise<{ html: string; source: "api" | "static" } | null> {
-  const fromTmp = await readRecord(recordFile(tmpDir(), slug));
-  if (fromTmp) return { html: fromTmp.html, source: "api" };
+  const tmpHtml = await readText(htmlPath(tmpDir(), slug));
+  if (tmpHtml) return { html: tmpHtml, source: "api" };
 
-  const fromData = await readRecord(recordFile(dataDir(), slug));
-  if (fromData) return { html: fromData.html, source: "api" };
-
-  const fromPublic = await readPublicHtml(slug);
-  if (fromPublic) return { html: fromPublic, source: "static" };
+  const publicHtml = await readText(htmlPath(publicDir(), slug));
+  if (publicHtml) return { html: publicHtml, source: "static" };
 
   return null;
 }
 
-async function writeRecord(dir: string, record: ProposalRecord) {
+async function writeLayout(dir: string, record: ProposalRecord) {
   await mkdir(dir, { recursive: true });
-  await writeFile(recordFile(dir, record.slug), JSON.stringify(record), "utf8");
+  await writeFile(htmlPath(dir, record.slug), record.html, "utf8");
+  await writeFile(
+    jsonPath(dir, record.slug),
+    JSON.stringify(
+      {
+        slug: record.slug,
+        proposal: record.proposal,
+        updatedAt: record.updatedAt,
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
 }
 
 export async function saveProposal(input: {
@@ -86,14 +87,30 @@ export async function saveProposal(input: {
     updatedAt: new Date().toISOString(),
   };
 
-  await writeRecord(tmpDir(), record);
+  await writeLayout(tmpDir(), record);
+
+  let wrotePublic = false;
   try {
-    await writeRecord(dataDir(), record);
+    await writeLayout(publicDir(), record);
+    wrotePublic = true;
   } catch {
-    // data/ is not writable on some hosts (e.g. Vercel). /tmp still serves the instant path.
+    // public/ is not writable on Vercel. /tmp still serves GET /proposals/[slug]
+    // on this instance. Durable publish is the git fallback (commit the .html).
   }
 
-  return record;
+  return { ...record, wrotePublic };
+}
+
+export function extractProposalJson(body: {
+  proposal?: unknown;
+  json?: unknown;
+}): Record<string, unknown> | null {
+  const raw = body.proposal ?? body.json;
+  if (raw === undefined || raw === null) return null;
+  if (typeof raw !== "object" || Array.isArray(raw)) {
+    throw new Error("proposal must be a JSON object.");
+  }
+  return raw as Record<string, unknown>;
 }
 
 export function authorizeProposalWrite(header: string | null) {
@@ -105,7 +122,9 @@ export function authorizeProposalWrite(header: string | null) {
     return { ok: false as const, status: 401, error: "Missing Bearer token." };
   }
   const token = header.slice("Bearer ".length).trim();
-  if (token !== secret) {
+  const a = Buffer.from(token);
+  const b = Buffer.from(secret);
+  if (a.length !== b.length || !timingSafeEqual(a, b)) {
     return { ok: false as const, status: 401, error: "Invalid token." };
   }
   return { ok: true as const };

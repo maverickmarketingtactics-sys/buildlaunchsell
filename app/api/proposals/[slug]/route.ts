@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   authorizeProposalWrite,
+  extractProposalJson,
   isValidSlug,
   MAX_HTML_BYTES,
   normalizeSlug,
@@ -12,6 +13,7 @@ export const runtime = "nodejs";
 type Body = {
   html?: unknown;
   proposal?: unknown;
+  json?: unknown;
 };
 
 export async function PUT(
@@ -45,13 +47,12 @@ export async function PUT(
   if (Buffer.byteLength(body.html, "utf8") > MAX_HTML_BYTES) {
     return NextResponse.json({ ok: false, error: "html exceeds 2MB." }, { status: 413 });
   }
-  if (
-    body.proposal !== undefined &&
-    body.proposal !== null &&
-    (typeof body.proposal !== "object" || Array.isArray(body.proposal))
-  ) {
+  let proposal: Record<string, unknown> | null;
+  try {
+    proposal = extractProposalJson(body);
+  } catch (error) {
     return NextResponse.json(
-      { ok: false, error: "proposal must be a JSON object." },
+      { ok: false, error: error instanceof Error ? error.message : "Invalid proposal JSON." },
       { status: 400 },
     );
   }
@@ -59,13 +60,18 @@ export async function PUT(
   const record = await saveProposal({
     slug,
     html: body.html,
-    proposal: (body.proposal as Record<string, unknown> | null) ?? null,
+    proposal,
   });
 
   return NextResponse.json({
     ok: true,
     slug: record.slug,
     url: `/proposals/${record.slug}`,
+    files: {
+      html: `public/proposals/${record.slug}.html`,
+      json: `public/proposals/${record.slug}.json`,
+    },
+    wrotePublic: record.wrotePublic,
     updatedAt: record.updatedAt,
   });
 }

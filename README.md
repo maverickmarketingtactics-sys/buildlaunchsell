@@ -52,9 +52,16 @@ curl -X PUT "$ORIGIN/api/proposals/acme-core" \
   -d '{"html":"<!doctype html><title>Acme</title><p>Working version scope</p>","proposal":{"client":"Acme"}}'
 ```
 
-On a writable host this lands in `data/proposals/<slug>.json` (gitignored) and `/tmp/bls-proposals`. On Vercel the filesystem is ephemeral, so treat API publish as the instant preview path and commit the git fallback for durability.
+Same on-disk layout as the git fallback:
 
-**Git fallback** — write `public/proposals/<slug>.html` and deploy. `GET /proposals/<slug>` serves that file if no API record exists.
+```
+public/proposals/<slug>.html
+public/proposals/<slug>.json
+```
+
+On Vercel `public/` is not durable, so the API also writes `/tmp/bls-proposals` for that instance. Commit the `.html` for a lasting deploy.
+
+**Git fallback** — add `public/proposals/<slug>.html` and deploy. `GET /proposals/<slug>` serves it.
 
 Stub index: `/proposals` (no public directory of clients).
 
