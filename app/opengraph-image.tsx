@@ -18,16 +18,56 @@ export default function OpenGraphImage() {
           padding: 72,
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            fontSize: 28,
-            color: "#1B4332",
-            letterSpacing: 2,
-            textTransform: "uppercase",
-          }}
-        >
-          BuildLaunchSell
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 16 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              gap: 7,
+              height: 36,
+            }}
+          >
+            <div
+              style={{
+                width: 12,
+                height: 16,
+                borderRadius: 6,
+                background: "#4F46E5",
+              }}
+            />
+            <div
+              style={{
+                width: 12,
+                height: 25,
+                borderRadius: 6,
+                background: "#4F46E5",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: 12,
+                height: 36,
+                borderRadius: 6,
+                overflow: "hidden",
+              }}
+            >
+              <div style={{ height: "30%", background: "#22D3EE" }} />
+              <div style={{ height: "70%", background: "#4F46E5" }} />
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 28,
+              color: "#0B1220",
+              letterSpacing: 0.2,
+              fontWeight: 600,
+            }}
+          >
+            BuildLaunchSell
+          </div>
         </div>
         <div
           style={{

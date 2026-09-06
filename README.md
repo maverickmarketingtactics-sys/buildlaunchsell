@@ -72,22 +72,26 @@ Stub index: `/proposals` (no public directory of clients).
 3. Set the env vars above (at least booking + acceptance when those URLs are live).
 4. Point `buildlaunchsell.com` at the project.
 
-## Brand (v0)
+## Brand (v1)
 
 | Token | Hex | Use |
 | --- | --- | --- |
 | ink | `#0B1220` | Text, dark surfaces |
 | paper | `#F7F4EF` | Page background |
-| signal | `#E85D04` | Primary CTA |
-| steel | `#1B4332` | Trust / “for you” |
+| signal | `#4F46E5` | Primary CTA |
+| signal-hover | `#4338CA` | CTA hover |
+| highlight | `#22D3EE` | Secondary accent / mark tip |
+| steel | `#312E81` | Trust / “for you” |
 | line | `#D9D2C5` | Borders |
 | muted | `#5C6570` | Secondary text |
+
+Logo files live in `public/brand/` (`bls-logo.svg` / `.png` wordmark, `bls-mark.svg` / `.png` icon). Favicon is the three-bar mark.
 
 Display: Fraunces. UI: Geist. Price chips: Geist Mono.
 
 ## QA checklist
 
-- [ ] Homepage is distinct from ownerbuiltsoftware.com in under 5 seconds (idea-to-market, orange CTA, offer card).
+- [ ] Homepage is distinct from ownerbuiltsoftware.com in under 5 seconds (idea-to-market, indigo CTA, offer card).
 - [ ] H1 is exactly: **Real price on call one. Working product in 48 hours.**
 - [ ] No “OwnerBuilt” / “OBS” in the H1 or primary chrome (nav / hero).
 - [ ] Offer math is visible: $0 / 45 min, $2,900 refundable / 48h, low five-figures 50/50.

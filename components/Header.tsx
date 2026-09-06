@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { bookingLinkProps, site } from "@/lib/site";
 
 const nav = [
@@ -18,11 +19,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-paper/90 backdrop-blur-md">
       <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 md:px-8">
-        <Link
-          href="/"
-          className="font-display text-[1.35rem] font-semibold tracking-tight text-ink"
-        >
-          BuildLaunchSell
+        <Link href="/" className="inline-flex items-center">
+          <Logo className="h-7 md:h-8" />
         </Link>
 
         <nav className="hidden items-center gap-7 text-[0.92rem] text-ink/80 md:flex">

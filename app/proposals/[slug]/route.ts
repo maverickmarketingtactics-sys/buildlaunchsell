@@ -44,7 +44,7 @@ function notFoundHtml(slug: string) {
     <p style="letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#5C6570">BuildLaunchSell</p>
     <h1 style="font-size:2rem">No proposal at /proposals/${slug}</h1>
     <p style="color:#5C6570;max-width:36rem">This URL is reserved for a live itemized proposal. If you were sent this link, ask for a republish.</p>
-    <p><a href="/" style="color:#1B4332">Back to BuildLaunchSell</a></p>
+    <p><a href="/" style="color:#312E81">Back to BuildLaunchSell</a></p>
   </body>
 </html>`;
 }
