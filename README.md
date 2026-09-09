@@ -2,7 +2,7 @@
 
 Marketing site for [buildlaunchsell.com](https://buildlaunchsell.com) — founders and operators taking a **software or app idea to market**.
 
-**Real price on call one. Working product in 48 hours.**
+**Total price on the first call. Working product in 48 hours.**
 
 This is not OwnerBuilt Software. OBS is for people who need software for an existing business (spreadsheets, texts, PDFs). BLS is the idea → market product. Client-facing copy says **working version**, never MVP.
 
@@ -92,7 +92,7 @@ Display: Fraunces. UI: Geist. Price chips: Geist Mono.
 ## QA checklist
 
 - [ ] Homepage is distinct from ownerbuiltsoftware.com in under 5 seconds (idea-to-market, indigo CTA, offer card).
-- [ ] H1 is exactly: **Real price on call one. Working product in 48 hours.**
+- [ ] H1 is exactly: **Total price on the first call. Working product in 48 hours.**
 - [ ] No “OwnerBuilt” / “OBS” in the H1 or primary chrome (nav / hero).
 - [ ] Offer math is visible: $0 / 45 min, $2,900 refundable / 48h, low five-figures 50/50.
 - [ ] Copy says **working version**, never MVP.

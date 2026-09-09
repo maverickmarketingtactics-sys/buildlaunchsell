@@ -3,7 +3,7 @@ export const site = {
   domain: "buildlaunchsell.com",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.buildlaunchsell.com",
   email: "hello@buildlaunchsell.com",
-  tagline: "Real price on call one. Working product in 48 hours.",
+  tagline: "Total price on the first call. Working product in 48 hours.",
   description:
     "We turn a software or app idea into an itemized proposal on a live screenshare — then a fully refundable working version you can log into in 48 hours.",
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL || "#book",

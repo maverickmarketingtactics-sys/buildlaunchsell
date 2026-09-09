@@ -23,7 +23,7 @@ export function Hero() {
             Idea to market — not another internal tool
           </p>
           <h1 className="font-display text-[2.35rem] leading-[1.08] font-semibold tracking-tight text-ink sm:text-5xl md:text-[3.35rem]">
-            Real price on call one. Working product in 48 hours.
+            Total price on the first call. Working product in 48 hours.
           </h1>
           <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-muted md:text-lg">
             We turn a software or app idea into an itemized proposal on a live

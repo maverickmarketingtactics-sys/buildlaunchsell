@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Real price on call one. Working product in 48 hours.";
+export const alt = "Total price on the first call. Working product in 48 hours.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -80,7 +80,7 @@ export default function OpenGraphImage() {
             maxWidth: 960,
           }}
         >
-          Real price on call one. Working product in 48 hours.
+          Total price on the first call. Working product in 48 hours.
         </div>
         <div style={{ display: "flex", gap: 16, fontSize: 22, color: "#5C6570" }}>
           $0 proposal · $2,900 refundable · 48-hour working version
