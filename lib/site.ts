@@ -1,7 +1,7 @@
 export const site = {
   name: "BuildLaunchSell",
   domain: "buildlaunchsell.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://buildlaunchsell.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.buildlaunchsell.com",
   email: "hello@buildlaunchsell.com",
   tagline: "Real price on call one. Working product in 48 hours.",
   description:
